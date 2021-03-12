@@ -22,18 +22,20 @@ class Inputs extends React.Component {
 
     sendMessage = () => {
         const newMsg = {
-            userName: this.state.valueUserName,
+            userName: this.state.valueUserName + " : ",
             userMessage: this.state.valueUserMessage,
         };
         this.setState({ 
             message: [...this.state.message, newMsg] 
         });
+        this.setState({ UserName: ""});
+        this.setState({ UserMessage: ""});
     };
         render() {
         const msgList = this.state.message.map((message) => {
         return (
             <p>
-                {message.userName} : {message.userMessage}
+                {message.userName}{message.userMessage}
             </p>
             
             );
@@ -44,8 +46,8 @@ class Inputs extends React.Component {
                 <div>{msgList}</div>
                 <div>
                     <input 
-                        value={this.state.valueUserName}
-                        onChange={this.handleUser}
+                        value={this.state.valueUserName }
+                        onChange={this.handleUser }
                         placeholder={'Quem é Você?'}
                     />
                     <input 
