@@ -1,5 +1,19 @@
-import React from 'react'
-import './Inputs.css'
+import React from 'react';
+import styled from "styled-components"
+
+const YourName = styled.input`
+    width: 30%;
+    margin-right: 10px;
+`;
+
+const YourMessage = styled.input`
+    width: 0%;
+    margin-right: 10px;
+`;
+
+const SendButton = styled.button`
+    width: 10%;
+`;
 
 class Inputs extends React.Component {
     state = {
@@ -26,10 +40,10 @@ class Inputs extends React.Component {
             userMessage: this.state.valueUserMessage,
         };
         this.setState({ 
-            message: [...this.state.message, newMsg] 
+            message: [...this.state.message, newMsg],
         });
-        this.setState({ UserName: ""});
-        this.setState({ UserMessage: ""});
+        this.setState({ valueUserName: ""});
+        this.setState({ valueUserMessage: ""});
     };
         render() {
         const msgList = this.state.message.map((message) => {
@@ -45,17 +59,16 @@ class Inputs extends React.Component {
             <div>
                 <div>{msgList}</div>
                 <div>
-                    <input 
+                    <YourName 
                         value={this.state.valueUserName }
                         onChange={this.handleUser }
                         placeholder={'Quem é Você?'}
                     />
-                    <input 
+                    <YourMessage 
                         value={this.state.valueUserMessage}
                         onChange={this.handleMensagem}
                         placeholder={'Vamos fofocar!'}
                     />
-
                     <button onClick={this.sendMessage}>Enviar</button>
                 </div>
 
