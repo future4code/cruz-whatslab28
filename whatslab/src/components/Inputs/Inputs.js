@@ -23,7 +23,7 @@ class Inputs extends React.Component {
     sendMessage = () => {
         const newMsg = {
             userName: this.state.valueUserName,
-            userMesage: this.state.valueUserMessage,
+            userMessage: this.state.valueUserMessage,
         };
         this.setState({ 
             message: [...this.state.message, newMsg] 
@@ -33,7 +33,7 @@ class Inputs extends React.Component {
         const msgList = this.state.message.map((message) => {
         return (
             <p>
-                {message.userName}{message.userMessage}
+                {message.userName} : {message.userMessage}
             </p>
             
             );
