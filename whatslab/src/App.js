@@ -7,7 +7,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>WhatsApp</h1>
+      
         <Inputs />
+        
       </div>
       
     );
