@@ -1,42 +1,67 @@
 import React from 'react'
-import Inputs from './Inputs.css'
-import styled from 'styled-components'
-import App from '../../App';
+import './Inputs.css'
 
 class Inputs extends React.Component {
     state = {
-        mensage: [],
-        userName: "",
-        userMessage: "",
+        message: [
+            {userName: ""},
+            {userMessage: ""}
+        ],
+        valueUserName: "",
+        valueUserMessage: "",
     };
+
+
+    handleUser = (event) => {
+        this.setState({ valueUserName: event.target.value });
+    };
+
+    handleMensagem = (event) => {
+        this.setState({ valueUserMessage: event.target.value });
+    };
+
+    sendMessage = () => {
+        const newMsg = {
+            userName: this.state.valueUserName,
+            userMesage: this.state.valueUserMessage,
+        };
+        this.setState({ 
+            message: [...this.state.message, newMsg] 
+        });
+    };
+        render() {
+        const msgList = this.state.message.map((message) => {
+        return (
+            <p>
+                {message.userName}{message.userMessage}
+            </p>
+            
+            );
+            
+        });
+        return(
+            <div>
+                <div>{msgList}</div>
+                <div>
+                    <input 
+                        value={this.state.valueUserName}
+                        onChange={this.handleUser}
+                        placeholder={'Quem é Você?'}
+                    />
+                    <input 
+                        value={this.state.valueUserMessage}
+                        onChange={this.handleMensagem}
+                        placeholder={'Vamos fofocar!'}
+                    />
+
+                    <button onClick={this.sendMessage}>Enviar</button>
+                </div>
+
+            </div>
+        )
+    }
+        
 }
 
-handleUsuario = (event) => {
-    this.setState({ userName: event.target.value });
-};
-
-handleMensagem = (event) => {
-    this.setState({ userMessage: event.target.value });
-};
-
-sendMessage = () => {
-    const newMsg = {
-        userName: this.state.userName,
-        userMesage: this.state.userMessage,
-    };
-    this.setState({ 
-        message: [...this.state.message, newMsg] 
-    });
-};
-    render() {
-    const msgList = this.state.message.map((msg, index) => {
-    return (
-        key={index}
-        userName={msg.userName}
-        userMessage={msg.userMessage}
-        );
-    });
-}
 
 export default Inputs;
-export deafult App
