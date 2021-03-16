@@ -1,26 +1,48 @@
 import React from 'react';
 import styled from "styled-components"
 
-const YourName = styled.input`
-    width: 30%;
-    margin-right: 10px;
-`;
+const AppBox = styled.div`
+    border: 3px solid black;
+    height: 100vh;
+    box-sizing: border-box;
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+`
 
-const YourMessage = styled.input`
-    width: 0%;
-    margin-right: 10px;
-`;
+const DialogueContainer = styled.div`
+    flex-grow: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: lightgreen;
+`
 
+const InputsContainer = styled.div`
+    display: flex;
+`
+
+const NameInput = styled.input`
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;
+    margin-right: 2px;
+`
+
+const MessageInput = styled.input`
+    flex-grow: 1;
+    border: 1px solid black;
+    margin-right: 2px;
+`
 const SendButton = styled.button`
-    width: 10%;
-`;
+    font-weight: bold;
+    background-color: darkgrey;
 
+`
 class Inputs extends React.Component {
     state = {
-        message: [
-            {userName: ""},
-            {userMessage: ""}
-        ],
+        message: [],
         valueUserName: "",
         valueUserMessage: "",
     };
@@ -45,37 +67,34 @@ class Inputs extends React.Component {
         this.setState({ valueUserName: ""});
         this.setState({ valueUserMessage: ""});
     };
-        render() {
-        const msgList = this.state.message.map((message) => {
-        return (
-            <p>
-                {message.userName}{message.userMessage}
-            </p>
-            
-            );
-            
-        });
-        return(
-            <div>
-                <div>{msgList}</div>
-                <div>
-                    <YourName 
-                        value={this.state.valueUserName }
-                        onChange={this.handleUser }
-                        placeholder={'Quem é Você?'}
-                    />
-                    <YourMessage 
-                        value={this.state.valueUserMessage}
-                        onChange={this.handleMensagem}
-                        placeholder={'Vamos fofocar!'}
-                    />
-                    <button onClick={this.sendMessage}>Enviar</button>
-                </div>
 
-            </div>
-        )
+
+    render() {
+        return (
+        <AppBox>
+        <DialogueContainer>
+            {this.state.message.map((message, index) => {
+            return <p key={index}>
+                <strong>{message.userName}</strong> {message.userMessage}
+            </p>
+            })}
+        </DialogueContainer>
+        <InputsContainer>
+            <NameInput
+            value={this.state.valueUserName }
+            onChange={this.handleUser }
+            placeholder={'Quem é Você?'}
+            />
+            <MessageInput
+            value={this.state.valueUserMessage}
+            onChange={this.handleMensagem}
+            placeholder={'Vamos fofocar!?'}
+            />
+            <SendButton onClick={this.sendMessage}>Enviar</SendButton>
+        </InputsContainer>
+        </AppBox>
+        );
     }
-        
 }
 
 
